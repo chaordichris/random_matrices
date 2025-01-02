@@ -74,6 +74,43 @@ if uploaded_file:
     ax3.legend()
     st.pyplot(fig3)
 
+# add a section for the marchenko pastur law   
+st.subheader("Marchenko-Pastur Law")
+
+# User inputs for covariance matrix dimensions
+p = st.sidebar.slider("Rows (p) in Matrix X", 10, 500, 100, step=10)
+n = st.sidebar.slider("Columns (n) in Matrix X", 10, 500, 200, step=10)
+q = p / n  # Aspect ratio
+lambda_plus = (1 + np.sqrt(q))**2
+lambda_minus = (1 - np.sqrt(q))**2
+
+# Generate random matrix and compute covariance matrix
+X = np.random.normal(0, 1, (p, n))
+M = np.dot(X.T, X) / n
+eigenvalues = np.linalg.eigvalsh(M)
+
+# Marchenko-Pastur theoretical distribution
+x = np.linspace(lambda_minus, lambda_plus, 500)
+mp_pdf = (1 / (2 * np.pi * q * x)) * np.sqrt((lambda_plus - x) * (x - lambda_minus))
+mp_pdf[x < lambda_minus] = 0
+mp_pdf[x > lambda_plus] = 0
+
+# Visualization
+fig, ax = plt.subplots()
+ax.hist(eigenvalues, bins=50, density=True, alpha=0.7, label="Eigenvalue Histogram")
+ax.plot(x, mp_pdf, color="red", lw=2, label="Marchenko-Pastur PDF")
+ax.set_title("Marchenko-Pastur Law")
+ax.set_xlabel("Eigenvalue")
+ax.set_ylabel("Density")
+ax.legend()
+
+st.pyplot(fig)
+st.markdown("""
+The **Marchenko-Pastur Law** describes the eigenvalue distribution of covariance matrices for large random matrices. 
+The red curve shows the theoretical distribution, and the histogram represents the empirical eigenvalues.
+""")
+
+
 
 
 
