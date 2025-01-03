@@ -129,6 +129,47 @@ The **Marchenko-Pastur Law** describes the eigenvalue distribution of covariance
 The red curve shows the theoretical distribution, and the histogram represents the empirical eigenvalues.
 """)
 
+# add a section for the applications of random matrix theory    
+st.header("Applications of Random Matrix Theory")
+st.markdown("""
+### Physics
+- Describes energy levels in quantum systems (e.g., atomic nuclei).
+### Finance
+- Models correlations in financial time series and portfolio optimization.
+### Machine Learning
+- Analyzes the behavior of large neural networks (e.g., spectrum of weight matrices).
+""")
+
+# visualizing the covariance matrix spectrum
+st.subheader("Covariance Matrix Spectrum")
+cov_matrix = np.cov(X.T)
+cov_eigenvalues = np.linalg.eigvalsh(cov_matrix)
+
+fig, ax = plt.subplots()
+ax.hist(cov_eigenvalues, bins=50, density=True, alpha=0.7, label="Eigenvalue Histogram")
+ax.set_title("Covariance Matrix Eigenvalue Spectrum")
+ax.set_xlabel("Eigenvalue")
+ax.set_ylabel("Density")
+st.pyplot(fig)
+st.markdown("""
+This plot shows the eigenvalue spectrum of the covariance matrix of a random dataset. 
+It highlights the concentration of eigenvalues for large systems.
+""")
+
+# visualizing the eigenvector component distribution
+st.subheader("Eigenvector Component Distribution")
+eigenvectors = np.linalg.eig(matrix)[1]
+fig, ax = plt.subplots()
+ax.hist(eigenvectors.flatten(), bins=50, density=True, alpha=0.7, label="Eigenvector Components")
+ax.set_title("Distribution of Eigenvector Components")
+ax.set_xlabel("Component Value")
+ax.set_ylabel("Density")
+st.pyplot(fig)
+st.markdown("""
+This plot shows the distribution of eigenvector components. For large random matrices, the components often follow a Gaussian distribution.
+""")
+
+
 
 
 
