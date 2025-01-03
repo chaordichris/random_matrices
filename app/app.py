@@ -22,19 +22,18 @@ matrix_type = st.sidebar.selectbox("Matrix type", ["Gaussian", "Uniform"])
 
 # add a noise level slider
 noise_level = st.sidebar.slider("Noise Level", 0.0, 2.0, 1.0, step=0.1)
-random_matrix = np.random.normal(0, noise_level, (matrix_size, matrix_size))
-random_matrix = (random_matrix + random_matrix.T) / 2  # Ensure symmetry
+# random_matrix = (random_matrix + random_matrix.T) / 2  # Ensure symmetry
 # add a checkbox to enforce symmetry    
 symmetric = st.sidebar.checkbox("Enforce Symmetry", value=True)
-if symmetric:
-    random_matrix = (random_matrix + random_matrix.T) / 2
+# if symmetric:
+#     random_matrix = (random_matrix + random_matrix.T) / 2
 
 
 
 # generate a random matrix  
 def generate_random_matrix(size, dist):
     if dist == "Gaussian":
-        return np.random.normal(0, 1, (size, size))
+        return np.random.normal(0, noise_level, (size, size))
     elif dist == "Uniform":
         return np.random.uniform(-1, 1, (size, size))
 
