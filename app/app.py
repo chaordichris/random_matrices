@@ -20,6 +20,17 @@ It has applications in physics, finance, statistics, and more. Key concepts incl
 matrix_size = st.sidebar.slider("Matrix size (NxN)", 10, 500, 100, step=10)
 matrix_type = st.sidebar.selectbox("Matrix type", ["Gaussian", "Uniform"])
 
+# add a noise level slider
+noise_level = st.sidebar.slider("Noise Level", 0.0, 2.0, 1.0, step=0.1)
+random_matrix = np.random.normal(0, noise_level, (matrix_size, matrix_size))
+random_matrix = (random_matrix + random_matrix.T) / 2  # Ensure symmetry
+# add a checkbox to enforce symmetry    
+symmetric = st.sidebar.checkbox("Enforce Symmetry", value=True)
+if symmetric:
+    random_matrix = (random_matrix + random_matrix.T) / 2
+
+
+
 # generate a random matrix  
 def generate_random_matrix(size, dist):
     if dist == "Gaussian":
