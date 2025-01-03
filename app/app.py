@@ -44,6 +44,16 @@ ax.legend()
 st.subheader("Eigenvalue Distribution")
 st.pyplot(fig)
 
+# explain the wigner semicircle law 
+st.markdown("""
+### Wigner Semicircle Law
+The **Wigner Semicircle Law** states that the eigenvalue density \( \rho(\lambda) \) of certain random symmetric matrices 
+follows a semicircular distribution:
+\[
+\rho(\lambda) = \frac{1}{2\pi} \sqrt{4 - \lambda^2}, \quad |\lambda| \leq 2.
+\]
+The histogram shows the eigenvalues of a random symmetric matrix, and the red curve is the theoretical prediction.
+""")
 # display the wigner semicircle law 
 st.subheader("Wigner Semicircle Law")
 x = np.linspace(-2, 2, 500)
