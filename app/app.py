@@ -21,7 +21,7 @@ tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "Marchenko-Pastur Law",
     "Applications",
     "Advanced Topics", 
-    "Example from Finance: Correlation Matrix of Returns"
+    "Example from Finance"
 ])
 
 # Tab 1: Overview & Basics
@@ -156,7 +156,7 @@ with tab5:
     """)
 
 with tab6:
-    st.header("Finance Example: Correlation Matrix of Real Stock Returns")
+    st.header("Finance Example: Correlation Matrix of Real World Stock Returns")
     st.markdown("""
     In finance, Random Matrix Theory is often applied to analyze correlation matrices of stock returns. 
     By studying the eigenvalue spectrum, we can identify whether correlations arise from noise or meaningful patterns.
