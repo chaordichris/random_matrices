@@ -180,9 +180,9 @@ with tab6:
     else:
         symbols = st.multiselect("Select Tickers", sp500_top50, default=['AAPL', 'MSFT', 'AMZN', 'GOOGL', 'GOOG', 'BRK-B', 'NVDA', 'TSLA', 'META'])
     # set default date range for returns
-    start_date = st.sidebar.date_input("Start Date",
+    start_date = st.date_input("Start Date",
                                     value=pd.to_datetime('2020-01-01'))
-    end_date = st.sidebar.date_input("End Date",
+    end_date = st.date_input("End Date",
                                     value=pd.to_datetime('2024-12-31'))
     
     # Fetch historical stock data
@@ -215,7 +215,7 @@ with tab6:
         """)
         
         # Display largest eigenvalues and associated stocks
-        num_largest = st.sidebar.slider("Number of Largest Eigenvalues to Display", 1, len(symbols), 3)
+        num_largest = st.slider("Number of Largest Eigenvalues to Display", 1, len(symbols), 3)
         idx_largest = np.argsort(eigenvalues)[-num_largest:]
         st.subheader("Largest Eigenvalues")
         for idx in reversed(idx_largest):
