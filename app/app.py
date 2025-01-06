@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 import pandas as pd
+import yfinance as yf
 
 st.title("Introduction to Random Matrix Theory")
 st.sidebar.title("Options")
@@ -14,12 +15,13 @@ noise_level = st.sidebar.slider("Noise Level", 0.0, 2.0, 1.0, step=0.1)
 symmetric = st.sidebar.checkbox("Enforce Symmetry", value=True)
 
 # Tabs
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "Overview & Basics",
     "Wigner Semicircle Law",
     "Marchenko-Pastur Law",
     "Applications",
-    "Advanced Topics"
+    "Advanced Topics", 
+    "Example from Finance: Correlation Matrix of Returns"
 ])
 
 # Tab 1: Overview & Basics
@@ -45,6 +47,9 @@ with tab1:
         matrix = (matrix + matrix.T) / 2
 
     st.subheader("Random Matrix")
+    st.markdown(f"Generate a random matrix by selected a size and type: 
+                * Guassian with mean 0 and standard deviation defined by the Noise Level parameter)
+                * Uniform with range -1, 1")
     st.write(matrix)
 
     # Eigenvalue distribution
@@ -150,3 +155,60 @@ with tab5:
     This plot shows the distribution of eigenvector components, which often follow a Gaussian distribution for large random matrices.
     """)
 
+with tab6:
+    st.header("Finance Example: Correlation Matrix of Real Stock Returns")
+    st.markdown("""
+    In finance, Random Matrix Theory is often applied to analyze correlation matrices of stock returns. 
+    By studying the eigenvalue spectrum, we can identify whether correlations arise from noise or meaningful patterns.
+    """)
+    
+    # User inputs
+    st.sidebar.subheader("Finance Example Options")
+    stock_list = st.sidebar.text_input("Enter stock symbols separated by commas (e.g., AAPL, MSFT, GOOGL)", value="AAPL, MSFT, GOOGL, AMZN, FB, TSLA, JPM, JNJ, V, PG")
+    num_days = st.sidebar.slider("Number of Days of Historical Data", 30, 1000, 252, step=10)
+    
+    # Parse stock symbols
+    symbols = [symbol.strip().upper() for symbol in stock_list.split(',')]
+    
+    # Fetch historical stock data
+    try:
+        data = yf.download(symbols, period=f"{num_days}d")['Adj Close']
+        returns = data.pct_change().dropna()
+        
+        # Compute correlation matrix
+        correlation_matrix = returns.corr().values
+        
+        st.subheader("Correlation Matrix")
+        st.write(pd.DataFrame(correlation_matrix, index=symbols, columns=symbols))
+        
+        # Compute eigenvalues
+        eigenvalues = np.linalg.eigvalsh(correlation_matrix)
+        
+        # Visualize eigenvalue spectrum
+        fig, ax = plt.subplots()
+        ax.hist(eigenvalues, bins=50, density=True, alpha=0.7, color="blue", label="Eigenvalue Histogram")
+        ax.set_title("Eigenvalue Spectrum of Correlation Matrix")
+        ax.set_xlabel("Eigenvalue")
+        ax.set_ylabel("Density")
+        ax.legend()
+        st.pyplot(fig)
+        
+        st.markdown("""
+        The histogram shows the eigenvalues of the correlation matrix constructed from real stock returns. 
+        Eigenvalues significantly different from the bulk may indicate market factors or correlated movements.
+        """)
+        
+        # Display largest eigenvalues and associated stocks
+        num_largest = st.sidebar.slider("Number of Largest Eigenvalues to Display", 1, len(symbols), 3)
+        idx_largest = np.argsort(eigenvalues)[-num_largest:]
+        st.subheader("Largest Eigenvalues")
+        for idx in reversed(idx_largest):
+            st.write(f"Eigenvalue: {eigenvalues[idx]:.4f}")
+        
+        st.markdown("""
+        Large eigenvalues may correspond to common factors affecting multiple stocks, such as overall market movements.
+        """)
+        
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+        st.write("Please check the stock symbols and try again.")
