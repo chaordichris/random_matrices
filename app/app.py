@@ -181,14 +181,14 @@ with tab6:
     
     # Fetch historical stock data
     try:
-        data = yf.download(symbols, start=start_date, end=end_date)['Adj Close']
+        data = yf.download(symbols, start=start_date, end=end_date)['Close']
         returns = data.pct_change().dropna()
         
         # Compute correlation matrix
         correlation_matrix = returns.corr().values
         
         st.subheader("Correlation Matrix")
-        st.write(returns)
+        # st.write(returns)
         st.write(pd.DataFrame(correlation_matrix, index=symbols, columns=symbols))
         
         # Compute eigenvalues
