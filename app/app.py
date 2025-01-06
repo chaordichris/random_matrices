@@ -167,7 +167,8 @@ with tab6:
     num_days = st.slider("Number of Days of Historical Data", 30, 1000, 252, step=10)
     
     # Parse stock symbols
-    symbols = [symbol.strip().upper() for symbol in stock_list.split(',')]
+    symbols = stock_list
+    # [symbol.strip().upper() for symbol in stock_list.split(',')]
     
     # Fetch historical stock data
     try:
