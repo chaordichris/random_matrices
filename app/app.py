@@ -163,12 +163,18 @@ with tab6:
     """)
     
     # User inputs
-    stock_list = st.text_input("Enter stock symbols separated by commas (e.g., AAPL, MSFT, GOOGL)", value="AAPL, MSFT, GOOGL, AMZN, FB, TSLA, JPM, JNJ, V, PG")
+    sp500_top50 = [
+    'AAPL', 'MSFT', 'AMZN', 'GOOGL', 'GOOG', 'BRK-B', 'NVDA', 'TSLA', 'META',
+    'UNH', 'JNJ', 'V', 'XOM', 'WMT', 'JPM', 'MA', 'PG', 'HD', 'BAC', 'PFE',
+    'ABBV', 'KO', 'DIS', 'PEP', 'NFLX', 'CSCO', 'NKE', 'LLY', 'MCD', 'VZ',
+    'MRK', 'TMO', 'CVX', 'ABT', 'CMCSA', 'DHR', 'AVGO', 'COST', 'ACN', 'NEE',
+    'WFC', 'LIN', 'TXN', 'ADBE', 'MDT', 'HON', 'UNP', 'ORCL', 'PM'
+]
+    # Ticker selection from sp500_top50
+    symbols = st.multiselect("Select Tickers",
+                                  sp500_top50,
+                                  default=['AAPL', 'MSFT', 'AMZN', 'GOOGL', 'GOOG', 'BRK-B', 'NVDA', 'TSLA', 'META'])
     num_days = st.slider("Number of Days of Historical Data", 30, 1000, 252, step=10)
-    
-    # Parse stock symbols
-    symbols = stock_list
-    # [symbol.strip().upper() for symbol in stock_list.split(',')]
     
     # Fetch historical stock data
     try:
