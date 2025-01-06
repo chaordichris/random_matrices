@@ -163,9 +163,8 @@ with tab6:
     """)
     
     # User inputs
-    st.sidebar.subheader("Finance Example Options")
-    stock_list = st.sidebar.text_input("Enter stock symbols separated by commas (e.g., AAPL, MSFT, GOOGL)", value="AAPL, MSFT, GOOGL, AMZN, FB, TSLA, JPM, JNJ, V, PG")
-    num_days = st.sidebar.slider("Number of Days of Historical Data", 30, 1000, 252, step=10)
+    stock_list = st.text_input("Enter stock symbols separated by commas (e.g., AAPL, MSFT, GOOGL)", value="AAPL, MSFT, GOOGL, AMZN, FB, TSLA, JPM, JNJ, V, PG")
+    num_days = st.slider("Number of Days of Historical Data", 30, 1000, 252, step=10)
     
     # Parse stock symbols
     symbols = [symbol.strip().upper() for symbol in stock_list.split(',')]
