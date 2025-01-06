@@ -178,6 +178,7 @@ with tab6:
         correlation_matrix = returns.corr().values
         
         st.subheader("Correlation Matrix")
+        st.write(returns)
         st.write(pd.DataFrame(correlation_matrix, index=symbols, columns=symbols))
         
         # Compute eigenvalues
