@@ -174,11 +174,14 @@ with tab6:
     symbols = st.multiselect("Select Tickers",
                                   sp500_top50,
                                   default=['AAPL', 'MSFT', 'AMZN', 'GOOGL', 'GOOG', 'BRK-B', 'NVDA', 'TSLA', 'META'])
-    num_days = st.slider("Number of Days of Historical Data", 30, 1000, 252, step=10)
+    start_date = st.sidebar.date_input("Start Date",
+                                    value=pd.to_datetime('2020-01-01'))
+    end_date = st.sidebar.date_input("End Date",
+                                    value=pd.to_datetime('2024-12-31'))
     
     # Fetch historical stock data
     try:
-        data = yf.download(symbols, period=f"{num_days}d")['Adj Close']
+        data = yf.download(symbols, start=start_date, end=end_date)['Adj Close']
         returns = data.pct_change().dropna()
         
         # Compute correlation matrix
