@@ -179,6 +179,7 @@ with tab6:
         
         st.subheader("Correlation Matrix")
         # display the returns data
+        st.write(symbols)
         st.write(returns)
         st.write(pd.DataFrame(correlation_matrix, index=symbols, columns=symbols))
         
