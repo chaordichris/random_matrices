@@ -171,9 +171,15 @@ with tab6:
     'WFC', 'LIN', 'TXN', 'ADBE', 'MDT', 'HON', 'UNP', 'ORCL', 'PM'
 ]
     # Ticker selection from sp500_top50
-    symbols = st.multiselect("Select Tickers",
-                                  sp500_top50,
-                                  default=['AAPL', 'MSFT', 'AMZN', 'GOOGL', 'GOOG', 'BRK-B', 'NVDA', 'TSLA', 'META'])
+    # Add a "Select All" checkbox
+    select_all = st.checkbox("Select All Tickers", value=False)
+
+    # Set default selection based on "Select All" checkbox
+    if select_all:
+        symbols = st.multiselect("Select Tickers", sp500_top50, default=sp500_top50)
+    else:
+        symbols = st.multiselect("Select Tickers", sp500_top50, default=['AAPL', 'MSFT', 'AMZN', 'GOOGL', 'GOOG', 'BRK-B', 'NVDA', 'TSLA', 'META'])
+    # set default date range for returns
     start_date = st.sidebar.date_input("Start Date",
                                     value=pd.to_datetime('2020-01-01'))
     end_date = st.sidebar.date_input("End Date",
