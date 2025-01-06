@@ -192,22 +192,24 @@ with tab6:
         
         # Compute correlation matrix
         correlation_matrix = returns.corr().values
-        
-        st.subheader("Correlation Matrix")
-        # st.write(returns)
-        st.write(pd.DataFrame(correlation_matrix, index=symbols, columns=symbols))
-        
         # Compute eigenvalues
         eigenvalues = np.linalg.eigvalsh(correlation_matrix)
+        col1, col2 = st.columns(2)
+        with col1:
+            st.subheader("Correlation Matrix")
+            # st.write(returns)
+            st.write(pd.DataFrame(correlation_matrix, index=symbols, columns=symbols))
         
+
+        with col2:
         # Visualize eigenvalue spectrum
-        fig, ax = plt.subplots()
-        ax.hist(eigenvalues, bins=50, density=True, alpha=0.7, color="blue", label="Eigenvalue Histogram")
-        ax.set_title("Eigenvalue Spectrum of Correlation Matrix")
-        ax.set_xlabel("Eigenvalue")
-        ax.set_ylabel("Density")
-        ax.legend()
-        st.pyplot(fig)
+            fig, ax = plt.subplots()
+            ax.hist(eigenvalues, bins=50, density=True, alpha=0.7, color="blue", label="Eigenvalue Histogram")
+            ax.set_title("Eigenvalue Spectrum of Correlation Matrix")
+            ax.set_xlabel("Eigenvalue")
+            ax.set_ylabel("Density")
+            ax.legend()
+            st.pyplot(fig)
         
         st.markdown("""
         The histogram shows the eigenvalues of the correlation matrix constructed from real stock returns. 
