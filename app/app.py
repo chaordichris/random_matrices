@@ -191,7 +191,7 @@ with tab6:
         returns = data.pct_change().dropna()
         
         # Compute correlation matrix
-        correlation_matrix = returns.corr().values
+        correlation_matrix = returns.corr().values.round(2)
         # Compute eigenvalues
         epsilon = 1e-6  # Regularization for numerical stability
         correlation_matrix += epsilon * np.eye(correlation_matrix.shape[0])
@@ -206,7 +206,7 @@ with tab6:
 
         with col2:
         # Visualize eigenvalue spectrum
-            fig, ax = plt.subplots(figsize=(6,4))
+            fig, ax = plt.subplots()
             ax.hist(eigenvalues, bins=50, density=True, alpha=0.7, color="blue", label="Eigenvalue Histogram")
             ax.set_title("Eigenvalue Spectrum of Correlation Matrix")
             ax.set_xlabel("Eigenvalue")
