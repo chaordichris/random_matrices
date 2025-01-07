@@ -88,8 +88,8 @@ with tab3:
     st.subheader("Marchenko-Pastur Law")
 
     # User inputs for covariance matrix dimensions
-    p = st.sidebar.slider("Rows (p) in Matrix X", 10, 500, 100, step=10)
-    n = st.sidebar.slider("Columns (n) in Matrix X", 10, 500, 200, step=10)
+    p = st.slider("Rows (p) in Matrix X", 10, 500, 100, step=10)
+    n = st.slider("Columns (n) in Matrix X", 10, 500, 200, step=10)
     q = p / n
     lambda_plus = (1 + np.sqrt(q))**2
     lambda_minus = (1 - np.sqrt(q))**2
@@ -203,7 +203,6 @@ with tab6:
             # st.write(returns)
             st.write(pd.DataFrame(correlation_matrix, index=symbols, columns=symbols))
         
-
         with col2:
         # Visualize eigenvalue spectrum
             fig, ax = plt.subplots()
