@@ -19,9 +19,9 @@ tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "Overview & Basics",
     "Wigner Semicircle Law",
     "Marchenko-Pastur Law",
-    "Applications",
     "Advanced Topics", 
-    "Example from Finance"
+    "Example from Finance", 
+    "Example from Physics"
 ])
 
 # Tab 1: Overview & Basics
@@ -119,19 +119,19 @@ with tab3:
     """)
 
 # Tab 4: Applications
-with tab4:
-    st.header("Applications of Random Matrix Theory")
-    st.markdown("""
-    ### Physics
-    - Describes energy levels in quantum systems (e.g., atomic nuclei).
-    ### Finance
-    - Models correlations in financial time series and portfolio optimization.
-    ### Machine Learning
-    - Analyzes the behavior of large neural networks (e.g., spectrum of weight matrices).
-    """)
+# with tab4:
+#     st.header("Applications of Random Matrix Theory")
+#     st.markdown("""
+#     ### Physics
+#     - Describes energy levels in quantum systems (e.g., atomic nuclei).
+#     ### Finance
+#     - Models correlations in financial time series and portfolio optimization.
+#     ### Machine Learning
+#     - Analyzes the behavior of large neural networks (e.g., spectrum of weight matrices).
+#     """)
 
 # Tab 5: Advanced Topics
-with tab5:
+with tab4:
     st.subheader("Covariance Matrix Spectrum")
     cov_matrix = np.cov(X.T)
     cov_eigenvalues = np.linalg.eigvalsh(cov_matrix)
@@ -155,7 +155,7 @@ with tab5:
     This plot shows the distribution of eigenvector components, which often follow a Gaussian distribution for large random matrices.
     """)
 
-with tab6:
+with tab5:
     st.header("Finance Example: Correlation Matrix of Real World Stock Returns")
     st.markdown("""
     In finance, Random Matrix Theory is often applied to analyze correlation matrices of stock returns. 
@@ -232,3 +232,6 @@ with tab6:
     except Exception as e:
         st.error(f"An error occurred: {e}")
         st.write("Please check the stock symbols and try again.")
+
+with tab6:
+    st.header("Finance Example: Correlation Matrix of Real World Stock Returns")
