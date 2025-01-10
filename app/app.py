@@ -234,4 +234,4 @@ with tab5:
         st.write("Please check the stock symbols and try again.")
 
 with tab6:
-    st.header("Finance Example: Correlation Matrix of Real World Stock Returns")
+    st.header("Physics Example:")
