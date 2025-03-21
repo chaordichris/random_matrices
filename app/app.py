@@ -90,7 +90,11 @@ with tab3:
     x = np.linspace(lambda_minus, lambda_plus, 500)
     mp_pdf = (1 / (2 * np.pi * q * x)) * np.sqrt((lambda_plus - x) * (x - lambda_minus))
     mp_pdf[(x < lambda_minus) | (x > lambda_plus)] = 0
-
+    # contect on the page
+    st.markdown("""
+    The **Marchenko-Pastur Law** describes the eigenvalue distribution of covariance matrices.
+    The histogram represents empirical eigenvalues, while the red curve shows the theoretical prediction.
+    """)
     fig3, ax3 = plt.subplots()
     ax3.hist(mp_eigenvalues, bins=50, density=True, alpha=0.7, label="Eigenvalue Histogram")
     ax3.plot(x, mp_pdf, color="red", lw=2, label="Marchenko-Pastur PDF")
@@ -100,10 +104,7 @@ with tab3:
     ax3.legend()
 
     st.pyplot(fig3)
-    st.markdown("""
-    The **Marchenko-Pastur Law** describes the eigenvalue distribution of covariance matrices.
-    The histogram represents empirical eigenvalues, while the red curve shows the theoretical prediction.
-    """)
+
 
 # Tab 4: Applications
 # with tab4:
