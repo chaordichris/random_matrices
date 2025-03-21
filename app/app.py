@@ -181,7 +181,9 @@ with tab5:
     if select_all:
         symbols = st.multiselect("Select Tickers", sp500_top50, default=sp500_top50)
     else:
-        symbols = st.multiselect("Select Tickers", sp500_top50, default=sp500_top50)
+        symbols = st.multiselect("Select Tickers", ["MMM", "AOS", "ABT", "ABBV", "ACN", "ATVI", "AYI", "ADBE", "AAP", "AMD",
+    "AES", "AFL", "A", "APD", "AKAM", "ALK", "ALB", "ARE", "ALGN", "ALLE",
+    "LNT", "ALL", "GOOGL", "GOOG", "MO", "AMZN", "AMCR", "AEE", "AAL", "AEP"], default=sp500_top50)
     # set default date range for returns
     start_date = st.date_input("Start Date",
                                     value=pd.to_datetime('2020-01-01'))
@@ -205,7 +207,6 @@ with tab5:
             st.subheader("Correlation Matrix")
             # st.write(returns)
             st.write(pd.DataFrame(correlation_matrix, index=symbols, columns=symbols))
-        st.write(correlation_matrix)
         with col2:
         # Visualize eigenvalue spectrum
             fig, ax = plt.subplots()
