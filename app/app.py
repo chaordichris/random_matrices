@@ -15,9 +15,8 @@ noise_level = st.sidebar.slider("Noise Level", 0.0, 2.0, 1.0, step=0.1)
 symmetric = st.sidebar.checkbox("Enforce Symmetry", value=True)
 
 # Tabs
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+tab1, tab3, tab4, tab5, tab6 = st.tabs([
     "Overview & Basics",
-    "Wigner Semicircle Law",
     "Marchenko-Pastur Law",
     "Advanced Topics", 
     "Example from Finance", 
@@ -47,26 +46,13 @@ with tab1:
         matrix = (matrix + matrix.T) / 2
 
     st.subheader("Random Matrix")
-    st.markdown(f"""Generate a random matrix by selected a size and type: /
+    st.markdown(f"""Generate a random matrix by selected a size and type:
                 * Guassian with mean 0 and standard deviation defined by the Noise Level parameter)
                 * Uniform with range -1, 1""")
     st.write(matrix)
 
     # Eigenvalue distribution
-    eigenvalues = np.linalg.eigvals(matrix)
-    fig, ax = plt.subplots()
-    ax.hist(eigenvalues.real, bins=50, density=True, alpha=0.7, color='blue', label="Eigenvalue Distribution")
-    ax.set_title("Eigenvalue Distribution")
-    ax.set_xlabel("Real Part of Eigenvalues")
-    ax.set_ylabel("Density")
-    ax.legend()
-
-    st.subheader("Eigenvalue Distribution")
-    st.pyplot(fig)
-
-# Tab 2: Wigner Semicircle Law
-with tab2:
-    st.subheader("Wigner Semicircle Law")
+    st.subheader("Eigenvalue Distribution - Wigner Semicircle Law")
     x = np.linspace(-2, 2, 500)
     wigner_pdf = (1 / (2 * np.pi)) * np.sqrt(4 - x**2)
     fig2, ax2 = plt.subplots()
@@ -77,11 +63,7 @@ with tab2:
     ax2.set_ylabel("Density")
     ax2.legend()
 
-    st.pyplot(fig2)
-    st.markdown("""
-    The **Wigner Semicircle Law** describes the eigenvalue density of random symmetric matrices.
-    The red curve shows the theoretical distribution, while the histogram shows scaled eigenvalues.
-    """)
+# Tab 2: Wigner Semicircle Law
 
 # Tab 3: Marchenko-Pastur Law
 with tab3:
@@ -232,6 +214,3 @@ with tab5:
     except Exception as e:
         st.error(f"An error occurred: {e}")
         st.write("Please check the stock symbols and try again.")
-
-with tab6:
-    st.header("Physics Example:")
