@@ -15,12 +15,11 @@ noise_level = st.sidebar.slider("Noise Level", 0.0, 2.0, 1.0, step=0.1)
 symmetric = st.sidebar.checkbox("Enforce Symmetry", value=True)
 
 # Tabs
-tab1, tab3, tab4, tab5, tab6 = st.tabs([
+tab1, tab3, tab4, tab5= st.tabs([
     "Overview & Basics",
     "Marchenko-Pastur Law",
     "Advanced Topics", 
     "Example from Finance", 
-    "Example from Physics"
 ])
 
 # Tab 1: Overview & Basics
@@ -224,7 +223,7 @@ with tab5:
             st.subheader("Correlation Matrix")
             # st.write(returns)
             st.write(pd.DataFrame(correlation_matrix, index=symbols, columns=symbols))
-        
+        st.write(correlation_matrix)
         with col2:
         # Visualize eigenvalue spectrum
             fig, ax = plt.subplots()
