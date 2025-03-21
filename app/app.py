@@ -52,6 +52,7 @@ with tab1:
     st.write(matrix)
 
     # Eigenvalue distribution
+    eigenvalues = np.linalg.eigvals(matrix)
     st.subheader("Eigenvalue Distribution - Wigner Semicircle Law")
     x = np.linspace(-2, 2, 500)
     wigner_pdf = (1 / (2 * np.pi)) * np.sqrt(4 - x**2)
@@ -63,7 +64,11 @@ with tab1:
     ax2.set_ylabel("Density")
     ax2.legend()
 
-# Tab 2: Wigner Semicircle Law
+    st.pyplot(fig2)
+    st.markdown("""
+    The **Wigner Semicircle Law** describes the eigenvalue density of random symmetric matrices.
+    The red curve shows the theoretical distribution, while the histogram shows scaled eigenvalues.
+    """)
 
 # Tab 3: Marchenko-Pastur Law
 with tab3:
