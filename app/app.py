@@ -15,10 +15,9 @@ noise_level = st.sidebar.slider("Noise Level", 0.0, 2.0, 1.0, step=0.1)
 symmetric = st.sidebar.checkbox("Enforce Symmetry", value=True)
 
 # Tabs
-tab1, tab3, tab4, tab5= st.tabs([
+tab1, tab3, tab5= st.tabs([
     "Overview & Basics",
     "Marchenko-Pastur Law",
-    "Advanced Topics", 
     "Example from Finance", 
 ])
 
@@ -110,12 +109,34 @@ with tab3:
     This plot shows the distribution of eigenvector components, which often follow a Gaussian distribution for large random matrices.
     """)
     st.subheader("Eigenvector Component Distribution")
+    # eigenvectors = np.linalg.eig(M)[1]
+    # fig5, ax5 = plt.subplots()
+    # ax5.hist(eigenvectors.flatten(), bins=50, density=True, alpha=0.7, label="Eigenvector Components")
+    # ax5.set_title("Distribution of Eigenvector Components")
+    # ax5.set_xlabel("Component Value")
+    # ax5.set_ylabel("Density")
+    # st.pyplot(fig5)
+    # Compute eigenvectors
     eigenvectors = np.linalg.eig(M)[1]
+    components = eigenvectors.flatten()
+    n = M.shape[0]
+
+    # Create histogram
     fig5, ax5 = plt.subplots()
-    ax5.hist(eigenvectors.flatten(), bins=50, density=True, alpha=0.7, label="Eigenvector Components")
+    ax5.hist(components, bins=50, density=True, alpha=0.7, label="Eigenvector Components")
+
+    # Theoretical normal distribution: N(0, 1/N)
+    x_vals = np.linspace(-0.2, 0.2, 500)
+    pdf = norm.pdf(x_vals, loc=0, scale=1/np.sqrt(n))
+    ax5.plot(x_vals, pdf, color='red', lw=2, label='Theoretical Normal (0, 1/N)')
+
+    # Labels and legend
     ax5.set_title("Distribution of Eigenvector Components")
     ax5.set_xlabel("Component Value")
     ax5.set_ylabel("Density")
+    ax5.legend()
+
+    # Show plot
     st.pyplot(fig5)
 
 
@@ -133,29 +154,29 @@ with tab3:
 #     """)
 
 # Tab 5: Advanced Topics
-with tab4:
-    st.subheader("Covariance Matrix Spectrum")
-    cov_matrix = np.cov(X.T)
-    cov_eigenvalues = np.linalg.eigvalsh(cov_matrix)
+# with tab4:
+#     st.subheader("Covariance Matrix Spectrum")
+#     cov_matrix = np.cov(X.T)
+#     cov_eigenvalues = np.linalg.eigvalsh(cov_matrix)
 
-    fig4, ax4 = plt.subplots()
-    ax4.hist(cov_eigenvalues, bins=50, density=True, alpha=0.7, label="Eigenvalue Histogram")
-    ax4.set_title("Covariance Matrix Eigenvalue Spectrum")
-    ax4.set_xlabel("Eigenvalue")
-    ax4.set_ylabel("Density")
-    st.pyplot(fig4)
+#     fig4, ax4 = plt.subplots()
+#     ax4.hist(cov_eigenvalues, bins=50, density=True, alpha=0.7, label="Eigenvalue Histogram")
+#     ax4.set_title("Covariance Matrix Eigenvalue Spectrum")
+#     ax4.set_xlabel("Eigenvalue")
+#     ax4.set_ylabel("Density")
+#     st.pyplot(fig4)
 
-    st.subheader("Eigenvector Component Distribution")
-    eigenvectors = np.linalg.eig(matrix)[1]
-    fig5, ax5 = plt.subplots()
-    ax5.hist(eigenvectors.flatten(), bins=50, density=True, alpha=0.7, label="Eigenvector Components")
-    ax5.set_title("Distribution of Eigenvector Components")
-    ax5.set_xlabel("Component Value")
-    ax5.set_ylabel("Density")
-    st.pyplot(fig5)
-    st.markdown("""
-    This plot shows the distribution of eigenvector components, which often follow a Gaussian distribution for large random matrices.
-    """)
+#     st.subheader("Eigenvector Component Distribution")
+#     eigenvectors = np.linalg.eig(matrix)[1]
+#     fig5, ax5 = plt.subplots()
+#     ax5.hist(eigenvectors.flatten(), bins=50, density=True, alpha=0.7, label="Eigenvector Components")
+#     ax5.set_title("Distribution of Eigenvector Components")
+#     ax5.set_xlabel("Component Value")
+#     ax5.set_ylabel("Density")
+#     st.pyplot(fig5)
+#     st.markdown("""
+#     This plot shows the distribution of eigenvector components, which often follow a Gaussian distribution for large random matrices.
+#     """)
 
 with tab5:
     st.header("Finance Example: Correlation Matrix of Real World Stock Returns")
