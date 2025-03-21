@@ -105,9 +105,11 @@ with tab2:
 
     st.pyplot(fig3)
     # plot the eigenvalue component distribution
-    st.markdown("""
-    - The red curve shows the theoretical **normal distribution** \( \\mathcal{{N}}(0, 1/N) \), which eigenvector components are expected to follow in large random matrices (here N = {n}).
-    """)
+    st.markdown(r"""
+    The red curve shows the theoretical **normal distribution** $\mathcal{N}(0, 1/N)$, 
+    which eigenvector components are expected to follow in large random matrices (here $N = %d$).
+    """ % n)
+
     st.subheader("Eigenvector Component Distribution")
     eigenvectors = np.linalg.eig(M)[1]
     components = eigenvectors.flatten()
