@@ -45,9 +45,11 @@ with tab1:
         matrix = (matrix + matrix.T) / 2
 
     st.subheader("Random Matrix")
-    st.markdown(f"""Generate a random matrix by selected a size and type:
-                * Guassian with mean 0 and standard deviation defined by the Noise Level parameter)
-                * Uniform with range -1, 1""")
+    st.markdown(f"""
+                Generate a random matrix by selected a size and type:
+                - Guassian with mean 0 and standard deviation defined by the Noise Level parameter)
+                - Uniform with range -1, 1
+                """)
     st.write(matrix)
 
     # Eigenvalue distribution
