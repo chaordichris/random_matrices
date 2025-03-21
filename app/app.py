@@ -106,17 +106,9 @@ with tab3:
     st.pyplot(fig3)
     # plot the eigenvalue component distribution
     st.markdown("""
-    This plot shows the distribution of eigenvector components, which often follow a Gaussian distribution for large random matrices.
+    - The red curve shows the theoretical **normal distribution** \( \\mathcal{{N}}(0, 1/N) \), which eigenvector components are expected to follow in large random matrices (here N = {n}).
     """)
     st.subheader("Eigenvector Component Distribution")
-    # eigenvectors = np.linalg.eig(M)[1]
-    # fig5, ax5 = plt.subplots()
-    # ax5.hist(eigenvectors.flatten(), bins=50, density=True, alpha=0.7, label="Eigenvector Components")
-    # ax5.set_title("Distribution of Eigenvector Components")
-    # ax5.set_xlabel("Component Value")
-    # ax5.set_ylabel("Density")
-    # st.pyplot(fig5)
-    # Compute eigenvectors
     eigenvectors = np.linalg.eig(M)[1]
     components = eigenvectors.flatten()
     n = M.shape[0]
