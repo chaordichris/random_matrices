@@ -190,7 +190,7 @@ with tab5:
     "ORLY", "OXY", "ODFL", "OMC", "OKE", "ORCL", "OGN", "OTIS", "PCAR", "PKG",
     "PH", "PAYX", "PAYC", "PYPL", "PENN", "PNR", "PBCT", "PEP", "PKI", "PFE",
     "PM", "PSX", "PNW", "PXD", "PNC", "POOL", "PPG", "PPL", "PFG", "PG",
-    "PGR", "PLD", "PRU", "PEG", "PTC", "PSA", "PHM", "PVH", "QRVO", "PWR
+    "PGR", "PLD", "PRU", "PEG", "PTC", "PSA", "PHM", "PVH", "QRVO", "PWR"
 ]
     # Ticker selection from sp500_top50
     # Add a "Select All" checkbox
