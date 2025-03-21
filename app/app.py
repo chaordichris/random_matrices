@@ -172,24 +172,6 @@ with tab5:
     "ETSY", "RE", "EVRG", "ES", "EXC", "EXPE", "EXPD", "EXR", "XOM", "FFIV",
     "FDS", "FAST", "FRT", "FDX", "FITB", "FRC", "FE", "FIS", "FISV", "FLT",
     "FMC", "F", "FTNT", "FTV", "FBHS", "FOXA", "FOX", "BEN", "FCX", "GRMN",
-    "IT", "GE", "GNRC", "GD", "GIS", "GM", "GPC", "GILD", "GL", "GPN", "GS",
-    "HAL", "HBI", "HIG", "HAS", "HCA", "PEAK", "HSIC", "HSY", "HES", "HPE",
-    "HLT", "HOLX", "HD", "HON", "HRL", "HST", "HWM", "HPQ", "HUM", "HBAN",
-    "HII", "IBM", "IEX", "IDXX", "INFO", "ITW", "ILMN", "INCY", "IR", "INTC",
-    "ICE", "IP", "IPG", "IFF", "INTU", "ISRG", "IVZ", "IPGP", "IQV", "IRM",
-    "JBHT", "JKHY", "J", "JNJ", "JCI", "JPM", "JNPR", "K", "KEY", "KEYS",
-    "KMB", "KIM", "KMI", "KLAC", "KHC", "KR", "LHX", "LH", "LRCX", "LW",
-    "LVS", "LDOS", "LEN", "LLY", "LNC", "LIN", "LYV", "LKQ", "LMT", "L",
-    "LOW", "LUMN", "LYB", "MTB", "MRO", "MPC", "MKTX", "MAR", "MMC", "MLM",
-    "MAS", "MA", "MTCH", "MKC", "MCD", "MCK", "MDT", "MRK", "META", "MET",
-    "MTD", "MGM", "MCHP", "MU", "MSFT", "MAA", "MRNA", "MHK", "MOH", "TAP",
-    "MDLZ", "MPWR", "MNST", "MCO", "MS", "MOS", "MSI", "MSCI", "NDAQ", "NTAP",
-    "NFLX", "NWL", "NEM", "NWSA", "NWS", "NEE", "NLSN", "NKE", "NI", "NDSN",
-    "NSC", "NTRS", "NOC", "NLOK", "NCLH", "NRG", "NUE", "NVDA", "NVR", "NXPI",
-    "ORLY", "OXY", "ODFL", "OMC", "OKE", "ORCL", "OGN", "OTIS", "PCAR", "PKG",
-    "PH", "PAYX", "PAYC", "PYPL", "PENN", "PNR", "PBCT", "PEP", "PKI", "PFE",
-    "PM", "PSX", "PNW", "PXD", "PNC", "POOL", "PPG", "PPL", "PFG", "PG",
-    "PGR", "PLD", "PRU", "PEG", "PTC", "PSA", "PHM", "PVH", "QRVO", "PWR"
 ]
     # Ticker selection from sp500_top50
     # Add a "Select All" checkbox
