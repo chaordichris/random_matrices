@@ -131,79 +131,79 @@ with tab2:
     # Show plot
     st.pyplot(fig5)
 
-with tab3:
-    st.header("Finance Example: Correlation Matrix of Real World Stock Returns")
-    st.markdown("""
-    In finance, Random Matrix Theory is often applied to analyze correlation matrices of stock returns. 
-    By studying the eigenvalue spectrum, we can identify whether correlations arise from noise or meaningful patterns.
-    """)
+# with tab3:
+#     st.header("Finance Example: Correlation Matrix of Real World Stock Returns")
+#     st.markdown("""
+#     In finance, Random Matrix Theory is often applied to analyze correlation matrices of stock returns. 
+#     By studying the eigenvalue spectrum, we can identify whether correlations arise from noise or meaningful patterns.
+#     """)
     
-    # User inputs
-    sp500_top50 = [
-    "MMM", "AOS", "ABT", "ABBV", "ACN", "ATVI", "AYI", "ADBE", "AAP", "AMD",
-    "AES", "AFL", "A", "APD", "AKAM", "ALK", "ALB", "ARE", "ALGN", "ALLE",
-    "LNT", "ALL", "GOOGL", "GOOG", "MO", "AMZN", "AMCR", "AEE", "AAL", "AEP"
-]
-    # Ticker selection from sp500_top50
-    # Add a "Select All" checkbox
-    select_all = st.checkbox("Select All Tickers", value=False)
+#     # User inputs
+#     sp500_top50 = [
+#     "MMM", "AOS", "ABT", "ABBV", "ACN", "ATVI", "AYI", "ADBE", "AAP", "AMD",
+#     "AES", "AFL", "A", "APD", "AKAM", "ALK", "ALB", "ARE", "ALGN", "ALLE",
+#     "LNT", "ALL", "GOOGL", "GOOG", "MO", "AMZN", "AMCR", "AEE", "AAL", "AEP"
+# ]
+#     # Ticker selection from sp500_top50
+#     # Add a "Select All" checkbox
+#     select_all = st.checkbox("Select All Tickers", value=False)
 
-    # Set default selection based on "Select All" checkbox
-    if select_all:
-        symbols = st.multiselect("Select Tickers", sp500_top50, default=sp500_top50)
-    else:
-        symbols = st.multiselect("Select Tickers", ["MMM", "AOS", "ABT", "ABBV", "ACN", "ATVI", "AYI", "ADBE", "AAP", "AMD",
-    "AES", "AFL", "A", "APD", "AKAM", "ALK", "ALB", "ARE", "ALGN", "ALLE",
-    "LNT", "ALL", "GOOGL", "GOOG", "MO", "AMZN", "AMCR", "AEE", "AAL", "AEP"], default=sp500_top50)
-    # set default date range for returns
-    start_date = st.date_input("Start Date",
-                                    value=pd.to_datetime('2020-01-01'))
-    end_date = st.date_input("End Date",
-                                    value=pd.to_datetime('2024-12-31'))
+#     # Set default selection based on "Select All" checkbox
+#     if select_all:
+#         symbols = st.multiselect("Select Tickers", sp500_top50, default=sp500_top50)
+#     else:
+#         symbols = st.multiselect("Select Tickers", ["MMM", "AOS", "ABT", "ABBV", "ACN", "ATVI", "AYI", "ADBE", "AAP", "AMD",
+#     "AES", "AFL", "A", "APD", "AKAM", "ALK", "ALB", "ARE", "ALGN", "ALLE",
+#     "LNT", "ALL", "GOOGL", "GOOG", "MO", "AMZN", "AMCR", "AEE", "AAL", "AEP"], default=sp500_top50)
+#     # set default date range for returns
+#     start_date = st.date_input("Start Date",
+#                                     value=pd.to_datetime('2020-01-01'))
+#     end_date = st.date_input("End Date",
+#                                     value=pd.to_datetime('2024-12-31'))
     
-    # Fetch historical stock data
-    try:
-        data = yf.download(symbols, start=start_date, end=end_date)['Close']
-        returns = data.pct_change().dropna()
+#     # Fetch historical stock data
+#     try:
+#         data = yf.download(symbols, start=start_date, end=end_date)['Close']
+#         returns = data.pct_change().dropna()
         
-        # Compute correlation matrix
-        correlation_matrix = returns.corr().values.round(2)
-        # Compute eigenvalues
-        epsilon = 1e-6  # Regularization for numerical stability
-        correlation_matrix += epsilon * np.eye(correlation_matrix.shape[0])
-        eigenvalues = np.linalg.eigvalsh(correlation_matrix)
-        # create the 
-        col1, col2 = st.columns([1,1])
-        with col1:
-            st.subheader("Correlation Matrix")
-            # st.write(returns)
-            st.write(pd.DataFrame(correlation_matrix, index=symbols, columns=symbols))
-        with col2:
-        # Visualize eigenvalue spectrum
-            fig, ax = plt.subplots()
-            ax.hist(eigenvalues, bins=50, density=True, alpha=0.7, color="blue", label="Eigenvalue Histogram")
-            ax.set_title("Eigenvalue Spectrum of Correlation Matrix")
-            ax.set_xlabel("Eigenvalue")
-            ax.set_ylabel("Density")
-            ax.legend()
-            st.pyplot(fig)
+#         # Compute correlation matrix
+#         correlation_matrix = returns.corr().values.round(2)
+#         # Compute eigenvalues
+#         epsilon = 1e-6  # Regularization for numerical stability
+#         correlation_matrix += epsilon * np.eye(correlation_matrix.shape[0])
+#         eigenvalues = np.linalg.eigvalsh(correlation_matrix)
+#         # create the 
+#         col1, col2 = st.columns([1,1])
+#         with col1:
+#             st.subheader("Correlation Matrix")
+#             # st.write(returns)
+#             st.write(pd.DataFrame(correlation_matrix, index=symbols, columns=symbols))
+#         with col2:
+#         # Visualize eigenvalue spectrum
+#             fig, ax = plt.subplots()
+#             ax.hist(eigenvalues, bins=50, density=True, alpha=0.7, color="blue", label="Eigenvalue Histogram")
+#             ax.set_title("Eigenvalue Spectrum of Correlation Matrix")
+#             ax.set_xlabel("Eigenvalue")
+#             ax.set_ylabel("Density")
+#             ax.legend()
+#             st.pyplot(fig)
         
-        st.markdown("""
-        The histogram shows the eigenvalues of the correlation matrix constructed from real stock returns. 
-        Eigenvalues significantly different from the bulk may indicate market factors or correlated movements.
-        """)
+#         st.markdown("""
+#         The histogram shows the eigenvalues of the correlation matrix constructed from real stock returns. 
+#         Eigenvalues significantly different from the bulk may indicate market factors or correlated movements.
+#         """)
         
-        # Display largest eigenvalues and associated stocks
-        num_largest = st.slider("Number of Largest Eigenvalues to Display", 1, len(symbols), 3)
-        idx_largest = np.argsort(eigenvalues)[-num_largest:]
-        st.subheader("Largest Eigenvalues")
-        for idx in reversed(idx_largest):
-            st.write(f"Eigenvalue: {eigenvalues[idx]:.4f}")
+#         # Display largest eigenvalues and associated stocks
+#         num_largest = st.slider("Number of Largest Eigenvalues to Display", 1, len(symbols), 3)
+#         idx_largest = np.argsort(eigenvalues)[-num_largest:]
+#         st.subheader("Largest Eigenvalues")
+#         for idx in reversed(idx_largest):
+#             st.write(f"Eigenvalue: {eigenvalues[idx]:.4f}")
         
-        st.markdown("""
-        Large eigenvalues may correspond to common factors affecting multiple stocks, such as overall market movements.
-        """)
+#         st.markdown("""
+#         Large eigenvalues may correspond to common factors affecting multiple stocks, such as overall market movements.
+#         """)
         
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
-        st.write("Please check the stock symbols and try again.")
+#     except Exception as e:
+#         st.error(f"An error occurred: {e}")
+#         st.write("Please check the stock symbols and try again.")
