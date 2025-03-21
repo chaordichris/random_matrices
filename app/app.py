@@ -15,7 +15,7 @@ noise_level = st.sidebar.slider("Noise Level", 0.0, 2.0, 1.0, step=0.1)
 symmetric = st.sidebar.checkbox("Enforce Symmetry", value=True)
 
 # Tabs
-tab1, tab3, tab5= st.tabs([
+tab1, tab2, tab3= st.tabs([
     "Overview & Basics",
     "Marchenko-Pastur Law",
     "Example from Finance", 
@@ -71,7 +71,7 @@ with tab1:
     """)
 
 # Tab 3: Marchenko-Pastur Law
-with tab3:
+with tab2:
     st.subheader("Marchenko-Pastur Law")
 
     # User inputs for covariance matrix dimensions
@@ -131,46 +131,7 @@ with tab3:
     # Show plot
     st.pyplot(fig5)
 
-
-
-# Tab 4: Applications
-# with tab4:
-#     st.header("Applications of Random Matrix Theory")
-#     st.markdown("""
-#     ### Physics
-#     - Describes energy levels in quantum systems (e.g., atomic nuclei).
-#     ### Finance
-#     - Models correlations in financial time series and portfolio optimization.
-#     ### Machine Learning
-#     - Analyzes the behavior of large neural networks (e.g., spectrum of weight matrices).
-#     """)
-
-# Tab 5: Advanced Topics
-# with tab4:
-#     st.subheader("Covariance Matrix Spectrum")
-#     cov_matrix = np.cov(X.T)
-#     cov_eigenvalues = np.linalg.eigvalsh(cov_matrix)
-
-#     fig4, ax4 = plt.subplots()
-#     ax4.hist(cov_eigenvalues, bins=50, density=True, alpha=0.7, label="Eigenvalue Histogram")
-#     ax4.set_title("Covariance Matrix Eigenvalue Spectrum")
-#     ax4.set_xlabel("Eigenvalue")
-#     ax4.set_ylabel("Density")
-#     st.pyplot(fig4)
-
-#     st.subheader("Eigenvector Component Distribution")
-#     eigenvectors = np.linalg.eig(matrix)[1]
-#     fig5, ax5 = plt.subplots()
-#     ax5.hist(eigenvectors.flatten(), bins=50, density=True, alpha=0.7, label="Eigenvector Components")
-#     ax5.set_title("Distribution of Eigenvector Components")
-#     ax5.set_xlabel("Component Value")
-#     ax5.set_ylabel("Density")
-#     st.pyplot(fig5)
-#     st.markdown("""
-#     This plot shows the distribution of eigenvector components, which often follow a Gaussian distribution for large random matrices.
-#     """)
-
-with tab5:
+with tab3:
     st.header("Finance Example: Correlation Matrix of Real World Stock Returns")
     st.markdown("""
     In finance, Random Matrix Theory is often applied to analyze correlation matrices of stock returns. 
